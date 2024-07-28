@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<title>الحروف التفاعلية - أكاديمية بابا أحمد للتأسيس</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+    body {
+            margin: 0;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color:rgba(220, 222, 224, 1)
+        }
+    table{
+        
+        border-collapse: collapse;
+        border-style: hidden;
+        width: 100%;
+        max-width: 600px; /* Adjust as needed */
+        margin-left: auto; 
+        margin-right: auto;
+        background-color:rgb(255, 255, 255)
+    }
+    td {
+        text-align: center;
+        vertical-align:middle;
+        padding-top: 1%;
+        padding-bottom: 1%;
+
+    }
+    td.Character-column:hover {
+        background-color: coral;
+        color: #ffffff;
+        }
+        td.Character-column {
+            font-size:xx-large;
+            font-weight: bold;
+            border: 5px solid rgb(193, 255, 135);
+        }
+        a {
+            text-decoration: none;
+        }
+
+        a .fa-youtube-play{color: #ff0000;}
+        a .fa-x-twitter{color: #000000}
+        a .fa-tiktok{color: #000000}
+        a .fa-telegram{color:aqua}
+        a .fa-snapchat{color: #eeff00;}
+        a .fa-leaf{color: #914dff;}
+        a .fa-headset{color: #0c8f00;}
+
+    td.youtube-column{
+            /* Styles for the YouTube column */
+    white-space: nowrap; /* Prevent text from wrapping */
+    padding: 0px; /* Adjust padding as needed */
+    text-align: center; /* Center the content horizontally */
+    font-size:xx-large;
+    }
+    td.first-column{
+        font-size:small;
+    }
+    h1 {
+        position:relative;
+        text-align: center;
+        right: 50%;
+        margin-bottom: 0;
+        transform: translate(50%,-50%);
+        font-family: verdana;
+        font-size: 5em;
+        font-weight: 700;
+        color: #f5f5f5;
+        text-shadow: 1px 1px 1px #919191,
+            1px 2px 1px #919191,
+            1px 3px 1px #919191,
+            1px 4px 1px #919191,
+            1px 5px 1px #919191,
+            1px 6px 1px #919191,
+            1px 7px 1px #919191,
+            1px 8px 1px #919191,
+            1px 9px 1px #919191,
+            1px 10px 1px #919191,
+        1px 18px 6px rgba(16,16,16,0.4),
+        1px 22px 10px rgba(16,16,16,0.2),
+        1px 25px 35px rgba(16,16,16,0.2),
+        1px 30px 60px rgba(16,16,16,0.4);
+        }
+        span {
+            font-size: 14px; /* Adjust as needed */
+            color: #666; /* Set the color for the span */
+            text-align: center;
+        }
+    div.notice{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        align-self: center;
+    }
+    ul {
+        list-style-type: none; 
+        margin: 0; 
+        padding: 0; 
+        display: flex; 
+    }
+    li{
+        margin-right: 30px;
+        font-size:xx-large;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <h1>الحروف التفاعلية</h1>
+    <audio id="myAudio" >
+        <source id="audioSource" src="" type="audio/ogg">
+        Your browser does not support the audio element.
+      </audio>
+    <div class="social-media" style="display: flex; justify-content: center; width: 100%;">
+        <ul>
+            <li><a href="https://t.me/ahmedofei"><i class="fa fa-headset"></i></a></li>
+            <li><a href="https://www.2022ah.com/"><i class="fa fa-globe"></i></a></li>
+            <li><a href="https://m.youtube.com/user/seef1991"><i class="fa fa-youtube-play"></i></a></li>
+            <li><a href="https://t.me/alofeiahmed"><i class="fa fa-telegram"></i></a></li>
+            <li><a href="https://x.com/baahac22"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.tiktok.com/@_ah199"><i class="fab fa-tiktok"></i></a></li>
+            <li><a href="https://www.snapchat.com/add/ahmed-jaza"><i class="fa fa-snapchat"></i></a></li>
+            <li><a href="https://l.jaco.live/1ytB0qG"><i class="fa fa-leaf"></i></a></li>
+
+        </ul>
+    </div>
+        <div style="display: flex; justify-content: center; width: 100%;">
+    <script>
+
+        let tableData = [
+        [1, 'مَـ', 'مُـ', 'مِـ', 'مَا', 'مُو', 'مِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [2, 'بَـ', 'بُـ', 'بِـ', 'بَا', 'بُو', 'بِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [3, 'لَـ', 'لُـ', 'لِـ', 'لَا', 'لُو', 'لِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [4, 'دَ', 'دُ', 'دِ', 'دَا', 'دُو', 'دِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [5, 'نَـ', 'نُـ', 'نِـ', 'نَا', 'نُو', 'نِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [6, 'رَ', 'رُ', 'رِ', 'رَا', 'رُو', 'رِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [7, 'صَـ', 'صُـ', 'صِـ', 'صَا', 'صُو', 'صِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [8, 'فَـ', 'فُـ', 'فِـ', 'فَا', 'فُو', 'فِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [9, 'سَـ', 'سُـ', 'سِـ', 'سَا', 'سُو', 'سِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [10, 'قَـ', 'قُـ', 'قِـ', 'قَا', 'قُو', 'قِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [11, 'تَـ', 'تُـ', 'تِـ', 'تَا', 'تُو', 'تِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [12, 'حَـ', 'حُـ', 'حِـ', 'حَا', 'حُو', 'حِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [13, 'أَ', 'أُ', 'إِ', 'آ', 'أُو', 'إِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [14, 'طَـ', 'طُـ', 'طِـ', 'طَا', 'طُو', 'طِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [15, 'زَ', 'زُ', 'زِ', 'زَا', 'زُو', 'زِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [16, 'وَ', 'وُ', 'وِ', 'وَا', 'وُو', 'وِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [17, 'جَـ', 'جُـ', 'جِـ', 'جَا', 'جُو', 'جِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [18, 'شَـ', 'شُـ', 'شِـ', 'شَا', 'شُو', 'شِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [19, 'ضَـ', 'ضُـ', 'ضِـ', 'ضَا', 'ضُو', 'ضِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [20, 'عَـ', 'عُـ', 'عِـ', 'عَا', 'عُو', 'عِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [21, 'كَـ', 'كُـ', 'كِـ', 'كَا', 'كُو', 'كِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [22, 'خَـ', 'خُـ', 'خِـ', 'خَا', 'خُو', 'خِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [23, 'يَـ', 'يُـ', 'يِـ', 'يَا', 'يُو', 'يِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [24, 'ذَ', 'ذُ', 'ذِ', 'ذَا', 'ذُو', 'ذِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [25, 'هَـ', 'هُـ', 'هِـ', 'هَا', 'هُو', 'هِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [26, 'ثَـ', 'ثُـ', 'ثِـ', 'ثَا', 'ثُو', 'ثِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [27, 'غَـ', 'غُـ', 'غِـ', 'غَا', 'غُو', 'غِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-'],
+        [28, 'ظَـ', 'ظُـ', 'ظِـ', 'ظَا', 'ظُو', 'ظِيـ', 'PL6EgC511QV97xAKadyaOeb4aBnKHjNz9-']
+        ];
+
+    function createTable(tableData) {
+    let table = document.createElement('table');
+    let row = {};
+    let cell = {};
+
+    tableData.forEach(function(rowData,index) {
+        row = table.insertRow(-1); // [-1] for last position in Safari
+        rowData.forEach(function(cellData, columnIndex) {
+            
+            cell = row.insertCell();
+            if(columnIndex===0){
+                cell.classList.add('first-column');
+                cell.textContent=cellData
+            }
+            else if (columnIndex === rowData.length - 1) {
+                cell.classList.add('youtube-column');
+                // Create an anchor tag for the last column
+                const id = cellData; // Assuming the last column contains playlist IDs
+                const aTag = document.createElement("a");
+                aTag.href = "https://www.youtube.com/playlist?list=" + id;
+                aTag.target="_blank"
+                aTag.title="الشرح"
+                // Create an icon (Font Awesome)
+                const icon = document.createElement("i");
+                icon.classList.add("fa", "fa-youtube-play"); // Add the appropriate Font Awesome class
+
+                // Append the icon to the anchor tag
+                aTag.appendChild(icon);
+                cell.appendChild(aTag);
+            
+            } else {
+                cell.textContent = cellData;
+                cell.classList.add('Character-column');
+                cell.addEventListener('click', () => {
+                // Call your custom function here, passing row and column information
+                myCustomFunction(index+1, columnIndex);
+                });
+            }
+        });
+    });
+
+    let mainTable = document.body.appendChild(table);
+    mainTable.border = 1;
+}
+
+
+createTable(tableData);
+
+let audio = document.getElementById('myAudio');
+let source = document.getElementById('audioSource');
+// Define your custom function
+function myCustomFunction(row, col) {
+    // Your logic here, using row and col as arguments
+    source.src = `sounds/sound${row}_${col}` + '.mp3';
+    console.log(source.src);
+
+    audio.load(); // Reload the audio element
+    audio.play(); // Play the new audio
+}
+
+    </script>
+
+    </div>
+<div class="notice">
+    <span>إهداء من أكاديمية بابا أحمد للتأسيس للإستخدام التعليمي، ولا نحلل إستخدامه تجارياً بأي شكل من الأشكال</span>
+</div>
+</body>
+</html>
