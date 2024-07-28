@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <title>CodePen - English Alphabets Game</title>
+
+  
+  
+  
+  
+<style>
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+}
+
+body{
+  /*font: caption;*/
+  font-family: 'Open Sans', sans-serif, 'Helvetica Neue', 'Lucida Grande';
+  font-size: 16px;
+  text-align: center;
+  color: white;
+}
+
+body, h1,h2,h3, h4, p{
+	margin:0;
+	padding:0;
+}
+
+.main-cont {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: -webkit-linear-gradient(left, #CC0000 0%, #FF5100 100%);
+  background: linear-gradient(90deg, #CC0000 0%, #FF5100 100%);
+  z-index: -4;
+}
+
+#mobile-text-input {
+  position: absolute;
+  top:-500px;
+  left:-500px;
+}
+
+#show-keyboard-button {
+  margin: 40px 0 0 0;
+  display: none;
+}
+#show-keyboard-button:hover{
+  background: none;
+  color: white;
+}
+
+#about-cont{
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  z-index: 1;
+  display: none;
+}
+
+.content-wrapper{
+  width: 600px;
+  margin: 0 auto;
+  position: relative;
+  height: 100%;
+}
+.content-wrapper, .char-cont {
+  padding: 0 20px;
+}
+
+.about-white-bg {
+  background: rgba(255, 255, 255, 1);
+  padding: 20px;
+  color: #333;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 2;
+  width: 100%;
+}
+
+.about-text {
+  color: #666666;
+}
+
+.about-text a{
+  color: #CC0000;
+  text-decoration: none;
+}
+.about-text a:hover {
+  text-decoration: underline;
+}
+
+.about-image {
+  background:url('https://mahdif.github.io/alphabets-game/images/omgomgomg.gif') center no-repeat;
+  width:100%;
+  height:150px;
+  margin: 20px 0;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin: 20px 0;
+}
+
+.about-title {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+#hide-button {
+  padding: 10px 20px;
+  margin: 20px 0 0 0;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.2);
+  font-size: 16px;
+  border-radius: 2px;
+  color: rgba(0,0,0,0.7);
+  cursor: pointer;
+}
+#hide-button:hover {
+  background: #CC0000;
+  color: white;
+}
+#hide-button:active {
+  background: #980000;
+  color: white;
+}
+
+.char-cont {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: -1;
+}
+
+.char {
+  font-size: 160px;
+  font-weight: 300;
+  position: relative;
+}
+.animationHabibi {
+  animation: growAnimation 0.2s ease-in-out 0s;
+  -webkit-animation: growAnimation 0.2s ease-in-out 0s;
+  -moz-animation: growAnimation 0.2s ease-in-out 0s;
+}
+
+footer {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  z-index: -2;
+}
+
+.habibi-button {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 14px 30px;
+  font-size: 14px;
+  background: none;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.habibi-button:hover {
+  background: white;
+  color: #DB1010;
+}
+
+.habibi-button:active {
+  background: rgba(0,0,0,0.4);
+  border-color: rgba(0, 0, 0, 0);
+  color: white;
+}
+
+/* Make me responsive */
+@media screen and (max-width: 800px){
+  body {
+    font-size: 14px;
+  }
+  .about-title {
+    font-size: 18px;
+  }
+  .char {
+    font-size: 80px;
+  }
+  .content-wrapper {
+    width: 100%;
+    overflow: auto;
+  }
+  .char-cont {
+    position: relative;
+    -webkit-transform: none;
+            transform: none;
+    top: 0;
+    margin: 40px 0 20px 0;
+  }
+  .animationHabibi {
+    -webkit-animation: none;
+            animation: none;
+  }
+  #show-keyboard-button {
+    display: inline-block;
+  }
+  footer {
+    position: relative;
+    margin-top: 200px;
+    bottom: 0;
+  }
+}
+@media screen and (max-width: 600px){
+  .char {
+    font-size: 50px;
+  }
+  .about-image {
+    height: 90px;
+    background-size: 90%;
+  }
+}
+
+/*
+  Animation habibi
+*/
+@-webkit-keyframes growAnimation {
+  0%   {
+    opacity: 0;
+    font-size: 0;
+  }
+  100% {
+    opacity: 1;
+    font-size: 160px;
+  }
+}
+@keyframes growAnimation {
+  0%   {
+    opacity: 0;
+    font-size: 0;
+  }
+  100% {
+    opacity: 1;
+    font-size: 160px;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <audio preload="auto">
+		<source id="oggSource" src="sounds/ogg/like-glass.ogg" type="audio/ogg">
+		<source id="mp3Source" src="sounds/mp3/like-glass.mp3" type="audio/mp3">
+		Oops! Looks like you're using an old browser, try using a modern browser like Google Chrome, Firefox or even Safari.
+	</audio>
+	<div class="main-cont">
+
+		<div id="about-cont">
+			<div class="content-wrapper">
+				<div class="about-white-bg">
+					<h2 class="about-title">A simple game to teach kids the English alphabets</h2>
+					<div class="about-image"></div>
+					<p class="about-text">
+						Was created on a Saturday night as an experiment 💩 by <a href="https://twitter.com/mahdif" target="_blank">@mahdif</a>.
+					</p>
+					<p class="about-text">
+						You can freely fork this tiny project on <a href="https://github.com/MahdiF/alphabets-game">GitHub.</a>
+					</p>
+					<p class="about-text">
+						Check out my other 🙈 <a href="http://mahdif.com/lab/" target="_blank">experiments</a>.
+					</p>
+					<hr>
+					<p class="about-text text-sounds-source">
+						Alphabet sounds from <a href="http://www.theblog.ca/mp3-audio-files-alphabet" target="_blank">Peter's Useful Crap</a>
+					</p>
+					<button id="hide-button" type="button" name="button">Hide</button>
+				</div>
+			</div>
+		</div>
+		<div class="char-cont">
+			<p id="big-char" class="char animationHabibi">
+				Type any letter
+			</p>
+			<button id="show-keyboard-button" class="habibi-button" type="button" name="button">Show keyboard</button>
+			<input id="mobile-text-input" type="text" name="name" value="oh you! you got me! let's chat @mahdif">
+		</div>
+		<footer>
+			<button id="mute-button" class="habibi-button" type="button" name="button">Mute Sounds</button>
+			<button id="about-button" class="habibi-button" type="button" name="button">About</button>
+		</footer>
+	</div>
+  
+      <script id="rendered-js" >
+// Declaring stuff
+myName = ""; // declaring a variable for my easter egg
+audioPlayer = document.getElementsByTagName('audio')[0];
+
+// ------ Functions ------
+// Getting the letter sound and playing it.
+function setLetterSound(letterVariable) {
+  var mp3Source = document.getElementById('mp3Source');
+  var oggSource = document.getElementById('oggSource');
+  mp3Source.src = 'sounds/mp3/' + letterVariable + '.mp3';
+  oggSource.src = 'sounds/ogg/' + letterVariable + '.ogg';
+}
+
+function setGenericSound() {
+  var mp3Source = document.getElementById('mp3Source');
+  var oggSource = document.getElementById('oggSource');
+  mp3Source.src = 'sounds/mp3/like-glass.mp3';
+  oggSource.src = 'sounds/ogg/like-glass.ogg';
+}
+
+// Generating a new element to restart the CSS3 animation.
+function generateNewElement() {
+  var elm = document.getElementById('big-char');
+  var newone = elm.cloneNode(true);
+  elm.parentNode.replaceChild(newone, elm);
+}
+
+// Running the HTML5 audio player
+function runAudioPlayer() {
+  audioPlayer.load(); // pre loading the audi file
+  // audioPlayer.currentTime = 0; // start the audio from the beginning
+  audioPlayer.play(); // play the audio
+}
+
+// Show and hide the about
+document.getElementById('hide-button').onclick = function () {
+  document.getElementById('about-cont').style.display = "none";
+};
+document.getElementById('about-button').onclick = function () {
+  document.getElementById('about-cont').style.display = "block";
+};
+
+// On mobile, when the user taps on "Show Keyboard" move the focus to the hidden input
+document.getElementById('show-keyboard-button').onclick = function () {
+  document.getElementById('mobile-text-input').focus();
+};
+
+document.onkeypress = function (event) {// Do stuff when you press any key in the document
+
+  letterOnScreen = document.getElementById('big-char'); // get the element properties
+  console.log(event.charCode);
+  if ( // if use pressed on any of these characters which are not numbers or letters
+  event.charCode === 13 ||
+  event.charCode === 32 ||
+  event.charCode === 92 ||
+  event.charCode === 96 ||
+  event.charCode === 61 ||
+  event.charCode === 43 ||
+  event.charCode === 45 ||
+  event.charCode === 33 ||
+  event.charCode === 64 ||
+  event.charCode === 35 ||
+  event.charCode === 36 ||
+  event.charCode === 37 ||
+  event.charCode === 94 ||
+  event.charCode === 38 ||
+  event.charCode === 42 ||
+  event.charCode === 40 ||
+  event.charCode === 41 ||
+  event.charCode === 95 ||
+  event.charCode === 91 ||
+  event.charCode === 93 ||
+  event.charCode === 34 ||
+  event.charCode === 39 ||
+  event.charCode === 47 ||
+  event.charCode === 63 ||
+  event.charCode === 62 ||
+  event.charCode === 44 ||
+  event.charCode === 60 ||
+  event.charCode === 46 ||
+  event.charCode === 59 ||
+  event.charCode === 58 ||
+  event.charCode === 123 ||
+  event.charCode === 124 ||
+  event.charCode === 125 ||
+  event.charCode === 126)
+  {
+    if (event.charCode === 13) {// getting the Enter key
+      letterOnScreen.innerHTML = "Enter";
+    } else if (event.charCode === 32) {
+      letterOnScreen.innerHTML = "Space";
+    } else {
+      letterOnScreen.innerHTML = String.fromCharCode(event.charCode);
+    }
+    setGenericSound(); // Set the generic sound in the resources of the audio tag
+    runAudioPlayer(); // Play sound
+    generateNewElement(); // Generate new DOM element to restart the animation
+  } else {
+    letterOnScreen.innerHTML = String.fromCharCode(event.charCode); // getting the pressed character
+    pressedLetter = String.fromCharCode(event.charCode).toLowerCase(); // passing the pressed letter to the function to add it to sources
+    setLetterSound(pressedLetter);
+    runAudioPlayer(); // Play sound
+    generateNewElement(); // Generate new DOM element to restart the animation
+  }
+
+  // An easter egg, if you type my name
+  myName += String.fromCharCode(event.charCode);
+  console.log(myName);
+  if (myName === "mahdi") {
+    alert('You typed my name!\n--------------------------------\nNow I will show you my website.');
+    window.open('http://mahdif.com', '_blank');
+  }
+
+};
+
+
+// Mute button
+document.getElementById('mute-button').onclick = function () {
+  if (audioPlayer.muted === false) {
+    audioPlayer.muted = true;
+    document.getElementById('mute-button').innerHTML = "Unmute Sounds";
+  } else {
+    audioPlayer.muted = false;
+    document.getElementById('mute-button').innerHTML = "Mute Sounds";
+  }
+};
+//# sourceURL=pen.js
+    </script>
+
+  
+</body>
+
+</html>
