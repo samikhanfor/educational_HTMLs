@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قراءة الساعة</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282828;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .flip-clock {
+            display: flex;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .flip-digit {
+            display: inline-block;
+            margin: 0 0.2rem;
+            padding: 0.5rem;
+            background-color: #444;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 80px; /* عرض ثابت للمربعات */
+            text-align: center; /* توسيط النص */
+        }
+
+        #hours {
+            color: #ff6347; /* أحمر للساعات */
+        }
+
+        #minutes {
+            color: #00ff00; /* أخضر للدقائق */
+        }
+
+        #seconds {
+            color: #00bfff; /* أزرق للثواني */
+        }
+
+        #ampm {
+            font-size: 2rem;
+            margin-left: 0.5rem; /* رمز AM/PM بجوار الساعة */
+        }
+
+        .labels {
+            position: absolute;
+            top: -30px; /* وضع التسميات فوق العناصر */
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .labels span {
+            width: 80px; /* نفس عرض العناصر */
+            text-align: center;
+        }
+
+        .analog-clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 10px solid #555;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 1rem; /* تباعد بين الساعة والنص */
+        }
+
+        .hand {
+            position: absolute;
+            background-color: #fff;
+            transform-origin: bottom center;
+            border-radius: 5px;
+        }
+
+        .hour-hand {
+            width: 6px;
+            height: 60px;
+            top: 40px;
+            left: 97px;
+            background-color: #ff6347; /* أحمر للساعات */
+        }
+
+        .minute-hand {
+            width: 4px;
+            height: 80px;
+            top: 20px;
+            left: 98px;
+            background-color: #00ff00; /* أخضر للدقائق */
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 90px;
+            top: 10px;
+            left: 99px;
+            background-color: #00bfff; /* أزرق للثواني */
+        }
+
+        .center-circle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            border-radius: 50%;
+            top: 94px;
+            left: 94px;
+        }
+
+        .minute-trail {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 90deg, /* البدء من الجهة اليمنى (90 درجة) */
+                rgba(255, 255, 0, 0.1) 0%, /* أصفر مع شفافية 10% */
+                rgba(255, 255, 0, 1) var(--trail-deg), /* أصفر مع شفافية 100% */
+                transparent var(--trail-deg),
+                transparent 100%
+            );
+            transform: rotate(-90deg);
+        }
+
+        .clock-numbers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .clock-numbers div {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black; /* حواف سوداء */
+        }
+
+        /* تحديد مواقع الأرقام حول الساعة */
+        .clock-numbers div:nth-child(1) { top: 10px; left: 50%; transform: translateX(-50%); } /* 12 */
+        .clock-numbers div:nth-child(2) { top: 25px; left: 75%; transform: translateX(-50%); } /* 1 */
+        .clock-numbers div:nth-child(3) { top: 50px; left: 90%; transform: translateX(-50%); } /* 2 */
+        .clock-numbers div:nth-child(4) { top: 85px; left: 95%; transform: translateX(-50%); } /* 3 */
+        .clock-numbers div:nth-child(5) { top: 120px; left: 90%; transform: translateX(-50%); } /* 4 */
+        .clock-numbers div:nth-child(6) { top: 145px; left: 75%; transform: translateX(-50%); } /* 5 */
+        .clock-numbers div:nth-child(7) { top: 160px; left: 50%; transform: translateX(-50%); } /* 6 */
+        .clock-numbers div:nth-child(8) { top: 145px; left: 25%; transform: translateX(-50%); } /* 7 */
+        .clock-numbers div:nth-child(9) { top: 120px; left: 10%; transform: translateX(-50%); } /* 8 */
+        .clock-numbers div:nth-child(10) { top: 85px; left: 5%; transform: translateX(-50%); } /* 9 */
+        .clock-numbers div:nth-child(11) { top: 50px; left: 10%; transform: translateX(-50%); } /* 10 */
+        .clock-numbers div:nth-child(12) { top: 25px; left: 25%; transform: translateX(-50%); } /* 11 */
+
+        .time-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* زر قراءة النص */
+        .read-button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: #00bfff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .read-button:hover {
+            background-color: #009acd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flip-clock">
+        <!-- التسميات فوق العناصر -->
+        <div class="labels">
+            <span>الثواني</span>
+            <span>الدقائق</span>
+            <span>الساعات</span>
+        </div>
+        <div class="flip-digit" id="seconds">٠٠</div> <!-- الثواني في البداية -->
+        <div class="flip-digit">:</div>
+        <div class="flip-digit" id="minutes">٠٠</div>
+        <div class="flip-digit">:</div>
+        <div class="flip-digit" id="hours">٠٠</div> <!-- الساعات في النهاية -->
+        <div id="ampm">🌞</div> <!-- رمز AM/PM بجوار الساعة -->
+    </div>
+
+    <div class="analog-clock">
+        <div class="minute-trail" id="minute-trail"></div>
+        <div class="hand hour-hand" id="hour-hand"></div>
+        <div class="hand minute-hand" id="minute-hand"></div>
+        <div class="hand second-hand" id="second-hand"></div>
+        <div class="center-circle"></div>
+        <!-- الأرقام حول الساعة -->
+        <div class="clock-numbers">
+            <div>١٢</div>
+            <div>١</div>
+            <div>٢</div>
+            <div>٣</div>
+            <div>٤</div>
+            <div>٥</div>
+            <div>٦</div>
+            <div>٧</div>
+            <div>٨</div>
+            <div>٩</div>
+            <div>١٠</div>
+            <div>١١</div>
+        </div>
+    </div>
+
+    <div class="time-text" id="time-text">الساعة الخامسة وربع مساء</div>
+
+    <!-- زر قراءة النص -->
+    <button class="read-button" id="read-button">قراءة النص</button>
+
+    <!-- صوت عقرب الثواني (تم تعطيله مؤقتًا) -->
+    <!-- <audio id="tick-sound" src="https://assets.mixkit.co/active_storage/sfx/1063/1063-preview.mp3"></audio> -->
+
+    <script>
+        // تحويل الأرقام إلى أرقام هندية (عربية)
+        function toArabicNumbers(number) {
+            const arabicDigits = "٠١٢٣٤٥٦٧٨٩";
+            return String(number).replace(/\d/g, (digit) => arabicDigits[digit]);
+        }
+
+        // تحويل الأرقام إلى نص عربي
+        function getArabicNumber(number) {
+            const arabicNumbers = [
+                "صفر", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثمان", "تسع",
+                "عشر", "إحدى عشرة", "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة",
+                "ست عشرة", "سبع عشرة", "ثمان عشرة", "تسع عشرة", "عشرون", "واحد وعشرون",
+                "اثنان وعشرون", "ثلاث وعشرون", "أربع وعشرون", "خمس وعشرون", "ست وعشرون",
+                "سبع وعشرون", "ثمان وعشرون", "تسع وعشرون", "ثلاثون", "واحد وثلاثون",
+                "اثنان وثلاثون", "ثلاث وثلاثون", "أربع وثلاثون", "خمس وثلاثون", "ست وثلاثون",
+                "سبع وثلاثون", "ثمان وثلاثون", "تسع وثلاثون", "أربعون", "واحد وأربعون",
+                "اثنان وأربعون", "ثلاث وأربعون", "أربع وأربعون", "خمس وأربعون"
+            ];
+            return arabicNumbers[number] || number;
+        }
+
+        // الحصول على النص الكتابي للوقت
+        function getTimeText(hours, minutes, ampm) {
+            const hourNames = [
+                "الاثنتا عشرة", "الواحدة", "الثانية", "الثالثة", "الرابعة", "الخامسة",
+                "السادسة", "السابعة", "الثامنة", "التاسعة", "العاشرة", "الحادية عشرة", "الاثنتا عشرة"
+            ];
+
+            let timeText = `الساعة ${hourNames[hours]}`;
+
+            if (minutes === 15) {
+                timeText += " وربع";
+            } else if (minutes === 30) {
+                timeText += " والنصف";
+            } else if (minutes === 45) {
+                timeText = `الساعة ${hourNames[(hours % 12) + 1]} إلا ربع`; // الساعة التالية إلا ربع
+            } else if (minutes > 0) {
+                timeText += ` و${getArabicNumber(minutes)} دقيقة`;
+            }
+
+            timeText += ` ${ampm === "🌞" ? "صباحًا" : "مساءً"}`;
+            return timeText;
+        }
+
+        // تحديث الساعة
+        function updateClock() {
+            const now = new Date();
+
+            // التحويل إلى تنسيق 12 ساعة
+            let hours = now.getHours() % 12;
+            hours = hours ? hours : 12; // التعامل مع منتصف الليل (0 يصبح 12)
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const ampm = now.getHours() >= 12 ? "🌜" : "🌞"; // رمز AM/PM
+
+            // تحديث الساعة الرقمية بالأرقام الهندية
+            document.getElementById('hours').textContent = toArabicNumbers(String(hours).padStart(2, '0'));
+            document.getElementById('minutes').textContent = toArabicNumbers(String(minutes).padStart(2, '0'));
+            document.getElementById('seconds').textContent = toArabicNumbers(String(seconds).padStart(2, '0'));
+            document.getElementById('ampm').textContent = ampm;
+
+            // تحديث الساعة التناظرية
+            const hourHand = document.getElementById('hour-hand');
+            const minuteHand = document.getElementById('minute-hand');
+            const secondHand = document.getElementById('second-hand');
+            const minuteTrail = document.getElementById('minute-trail');
+
+            const hourDeg = (hours % 12) * 30 + (minutes / 2);
+            const minuteDeg = minutes * 6 + (seconds / 10);
+            const secondDeg = seconds * 6;
+
+            hourHand.style.transform = `rotate(${hourDeg}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+            secondHand.style.transform = `rotate(${secondDeg}deg)`;
+
+            // تحديث ذيل الدقائق
+            const trailDeg = (minutes / 60) * 360; // حساب النسبة المئوية للساعة
+            minuteTrail.style.setProperty('--trail-deg', `${trailDeg}deg`);
+
+            // تحديث النص الكتابي
+            const timeText = getTimeText(hours, minutes, ampm);
+            document.getElementById('time-text').textContent = timeText;
+
+            // تشغيل صوت عقرب الثواني (تم تعطيله مؤقتًا)
+            // const tickSound = document.getElementById('tick-sound');
+            // tickSound.currentTime = 0; // إعادة تشغيل الصوت من البداية
+            // tickSound.play();
+        }
+
+        // تحويل النص إلى كلام
+        function speakText() {
+            const timeText = document.getElementById('time-text').textContent;
+            const utterance = new SpeechSynthesisUtterance(timeText);
+            utterance.lang = 'ar-SA'; // تعيين اللغة إلى العربية (السعودية)
+            speechSynthesis.speak(utterance);
+        }
+
+        // إضافة حدث النقر لزر قراءة النص
+        document.getElementById('read-button').addEventListener('click', speakText);
+
+        setInterval(updateClock, 1000);
+        updateClock(); // تحديث الساعة فورًا عند التحميل
+    </script>
+
+</body>
+</html>
